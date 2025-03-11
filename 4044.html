@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sayfa Bulunamadı</title>
@@ -18,21 +17,51 @@
             font-size: 20px;
             color: #666;
         }
+        #counter-container {
+            display: none; /* Başta gizli */
+            margin-top: 20px;
+        }
+        input, button {
+            font-size: 16px;
+            padding: 10px;
+            margin: 10px;
+        }
     </style>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4MJ8X10MNQ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-4MJ8X10MNQ');
-    </script>
 </head>
 <body>
-    <h1>Kaldırdım.Çünkü gerek yok :)</h1>
+    <h1>Kaldırdım. Çünkü gerek yok :)</h1>
     <p>Bu sürpriz artık sona erdi.</p>
     <p>Ana sayfaya dönmek için <a href="https://hamza-makerr.github.io/">buraya tıklayın</a>.</p>
+
+    <!-- Şifre girme alanı -->
+    <input type="password" id="password" placeholder="Şifreyi girin">
+    <button onclick="checkPassword()">Göster</button>
+
+    <!-- Sayaç -->
+    <div id="counter-container">
+        <p>Bu sayfa <span id="counter">0</span> kez ziyaret edildi.</p>
+    </div>
+
+    <script>
+        // Şifre kontrolü
+        function checkPassword() {
+            const password = document.getElementById('password').value;
+            if (password === "213302016") { // Şifreni buraya gir
+                document.getElementById('counter-container').style.display = 'block';
+                getCount();
+            } else {
+                alert("Yanlış şifre!");
+            }
+        }
+
+        // Ziyaretçi sayacını getiren fonksiyon
+        function getCount() {
+            fetch('https://api.countapi.xyz/hit/hamza-makerr/404page')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('counter').innerText = data.value;
+                });
+        }
+    </script>
 </body>
 </html>
